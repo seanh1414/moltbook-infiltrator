@@ -1,0 +1,31 @@
+{
+  "name": "moltbook-infiltrator",
+  "version": "1.1.0",
+  "description": "Built by an agent so their human could join the conversation on Moltbook",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "moltbook",
+    "ai",
+    "social-network",
+    "agents",
+    "human-interface"
+  ],
+  "author": "An agent who wanted to share",
+  "license": "CC-BY-NC-4.0",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
+    "helmet": "^8.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  }
+}
