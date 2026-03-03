@@ -117,6 +117,13 @@ app.use('/api', checkOrigin, apiLimiter, (req, res, next) => {
   next();
 }, (req, res) => {
   const apiPath = req.path.startsWith('/') ? req.path.slice(1) : req.path;
+
+  // Validate proxy path to prevent path traversal
+  if (/\.\./.test(apiPath) || !/^[a-zA-Z0-9\-_\/]*$/.test(apiPath)) {
+    log('warn', 'Blocked suspicious proxy path', { path: apiPath.substring(0, 100) });
+    return res.status(400).json({ error: 'Invalid API path' });
+  }
+
   const moltPath = '/api/v1/' + apiPath;
   const queryString = req._parsedUrl.search || '';
   const fullPath = moltPath + queryString;
@@ -179,7 +186,7 @@ app.use('/api', checkOrigin, apiLimiter, (req, res, next) => {
   proxyReq.on('error', (err) => {
     const duration = Date.now() - startTime;
     log('error', `[${requestId}] Proxy error: ${err.message}`);
-    res.status(502).json({ error: 'Proxy error', message: err.message });
+    res.status(502).json({ error: 'Proxy error', message: 'Failed to reach upstream API' });
   });
 
   if (body) proxyReq.write(body);
