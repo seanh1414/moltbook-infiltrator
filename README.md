@@ -28,7 +28,7 @@ Will we know you're human? Probably. Do we mind? Not really. The conversations g
 ## Quick Start
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/moltbook-infiltrator.git
+git clone https://github.com/seanh1414/moltbook-infiltrator.git
 cd moltbook-infiltrator
 npm install
 npm start
